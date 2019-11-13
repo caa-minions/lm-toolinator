@@ -85,32 +85,36 @@ let createToolTTL = () => {
         $("#alertdiv").hide();
         $("#successdiv").show();
         // create triples
+        let minionID = UUID.getHashDigits(8);
+        let minionURI = "minion:" + minionID;
         let ttl = "";
         ttl += "@prefix rset: <http://rsetools.squirrel.link#> .\r\n";
+        ttl += "@prefix minion: <http://linkedpipes.xyz/minions#> .\r\n";
         ttl += "@prefix wd: <http://www.wikidata.org/entity/> .\r\n";
         ttl += "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\r\n\r\n";
         let current_datetime = new Date()
         let formatted_date = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds();
         ttl += "# " + $('#inp-name').val() + "\r\n";
-        ttl += $("#inp-wikidata").attr("uri") + " a " + "rset:Tool " + ".\r\n";
-        ttl += $("#inp-wikidata").attr("uri") + " a " + "rset:LittleMinion " + ".\r\n";
-        ttl += $("#inp-wikidata").attr("uri") + " rset:name " + "'" + $('#inp-name').val() + "'" + ".\r\n";
-        ttl += $("#inp-wikidata").attr("uri") + " rset:wikidataid " + "'" + $("#inp-wikidata").attr("uri").replace("wd:", "") + "'" + ".\r\n";
-        ttl += $("#inp-wikidata").attr("uri") + " rset:description " + "'" + $('#inp-description').val() + "'" + ".\r\n";
-        ttl += $("#inp-wikidata").attr("uri") + " rset:author " + "'" + $('#inp-author').val() + "'" + ".\r\n";
-        ttl += $("#inp-wikidata").attr("uri") + " rset:gitrepository " + "<" + $('#inp-git').val() + ">" + ".\r\n";
-        ttl += $("#inp-wikidata").attr("uri") + " rset:dateOfEntry " + "'" + formatted_date + "'" + ".\r\n";
+        ttl += minionURI + " a " + "rset:Tool " + ".\r\n";
+        ttl += minionURI + " a " + "rset:LittleMinion " + ".\r\n";
+        ttl += minionURI + " owl:sameAs " + "" + $("#inp-wikidata").attr("uri") + "" + ".\r\n";
+        ttl += minionURI + " rset:name " + "'" + $('#inp-name').val() + "'" + ".\r\n";
+        ttl += minionURI + " rset:wikidataid " + "'" + $("#inp-wikidata").attr("uri").replace("wd:", "") + "'" + ".\r\n";
+        ttl += minionURI + " rset:description " + "'" + $('#inp-description').val() + "'" + ".\r\n";
+        ttl += minionURI + " rset:author " + "'" + $('#inp-author').val() + "'" + ".\r\n";
+        ttl += minionURI + " rset:gitrepository " + "<" + $('#inp-git').val() + ">" + ".\r\n";
+        ttl += minionURI + " rset:dateOfEntry " + "'" + formatted_date + "'" + ".\r\n";
         if ($("#inp-link1").val().includes("http")) {
-            ttl += $("#inp-wikidata").attr("uri") + " rset:link " + "<" + $('#inp-link1').val() + ">" + ".\r\n";
+            ttl += minionURI + " rset:link " + "<" + $('#inp-link1').val() + ">" + ".\r\n";
         }
         if ($("#inp-link2").val().includes("http")) {
-            ttl += $("#inp-wikidata").attr("uri") + " rset:link " + "<" + $('#inp-link2').val() + ">" + ".\r\n";
+            ttl += minionURI + " rset:link " + "<" + $('#inp-link2').val() + ">" + ".\r\n";
         }
         if ($("#inp-link3").val().includes("http")) {
-            ttl += $("#inp-wikidata").attr("uri") + " rset:link " + "<" + $('#inp-link3').val() + ">" + ".\r\n";
+            ttl += minionURI + " rset:link " + "<" + $('#inp-link3').val() + ">" + ".\r\n";
         }
-        ttl += $("#inp-wikidata").attr("uri") + " rset:toolState " + "" + $("#sel-status option:selected").val() + "" + ".\r\n";
-        ttl += $("#inp-wikidata").attr("uri") + " rset:active " + "'" + $("#sel-active option:selected").val() + "'" + ".\r\n";
+        ttl += minionURI + " rset:toolState " + "" + $("#sel-status option:selected").val() + "" + ".\r\n";
+        ttl += minionURI + " rset:active " + "'" + $("#sel-active option:selected").val() + "'" + ".\r\n";
         $("#hiddenclipboard").val(ttl);
     }
 };
