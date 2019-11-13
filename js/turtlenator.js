@@ -64,10 +64,6 @@ let createToolTTL = () => {
         valide = false;
         console.log(false, "author");
     }
-    if ($("#inp-git").val().length === 0) {
-        valide = false;
-        console.log(false, "git");
-    }
     if ($("#sel-status option:selected").val() === "-1") {
         valide = false;
         console.log(false, "status");
@@ -102,7 +98,9 @@ let createToolTTL = () => {
         ttl += minionURI + " rset:wikidataid " + "'" + $("#inp-wikidata").attr("uri").replace("wd:", "") + "'" + ".\r\n";
         ttl += minionURI + " rset:description " + "'" + $('#inp-description').val() + "'" + ".\r\n";
         ttl += minionURI + " rset:author " + "'" + $('#inp-author').val() + "'" + ".\r\n";
-        ttl += minionURI + " rset:gitrepository " + "<" + $('#inp-git').val() + ">" + ".\r\n";
+        if ($("#inp-git").val().includes("http")) {
+            ttl += minionURI + " rset:gitrepository " + "<" + $('#inp-git').val() + ">" + ".\r\n";
+        }
         ttl += minionURI + " rset:dateOfEntry " + "'" + formatted_date + "'" + ".\r\n";
         if ($("#inp-link1").val().includes("http")) {
             ttl += minionURI + " rset:link " + "<" + $('#inp-link1').val() + ">" + ".\r\n";
