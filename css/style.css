@@ -482,7 +482,7 @@ tr.bg {
 
 .dashboardkacheln {
     width: calc(100%);
-    height: calc(50% - 10px);
+    height: calc(100% - 10px);
     float: left;
     margin-left: 10px;
     margin-top: 10px;
