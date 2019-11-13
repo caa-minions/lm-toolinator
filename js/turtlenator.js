@@ -86,6 +86,7 @@ let createToolTTL = () => {
         let ttl = "";
         ttl += "@prefix rset: <http://rsetools.squirrel.link#> .\r\n";
         ttl += "@prefix minion: <http://linkedpipes.xyz/minions#> .\r\n";
+        ttl += "@prefix owl: <http://www.w3.org/2002/07/owl#> .\r\n";
         ttl += "@prefix wd: <http://www.wikidata.org/entity/> .\r\n";
         ttl += "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\r\n\r\n";
         let current_datetime = new Date()
